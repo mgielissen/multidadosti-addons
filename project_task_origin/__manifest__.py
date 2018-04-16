@@ -13,11 +13,10 @@
         'project_kanban_onclick_redirect_project',
     ],
     'data': [
-        'views/project_project.xml',
+        'template/assets.xml',
         'views/project_task.xml',
     ],
     'installable': True,
     'auto_install': False,
     'application': False,
 }
-
