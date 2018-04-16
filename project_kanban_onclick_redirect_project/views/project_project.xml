@@ -32,12 +32,6 @@
                                         <t t-esc="record.user_id.value"/>
                                     </span>
                                 </div>
-                                <div t-if="record.alias_name.value and record.alias_domain.value">
-                                    <span>
-                                        <i class="fa fa-envelope"></i>
-                                        <t t-esc="record.alias_id.value"/>
-                                    </span>
-                                </div>
                             </div>
                         </div>
                         <div class="o_kanban_card_manage_pane o_invisible">
