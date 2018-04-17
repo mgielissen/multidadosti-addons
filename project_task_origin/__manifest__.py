@@ -11,6 +11,7 @@
     ],
     'depends': [
         'project_kanban_onclick_redirect_project',
+        'project_task_code',
     ],
     'data': [
         'template/assets.xml',

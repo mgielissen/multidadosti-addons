@@ -26,10 +26,16 @@
     <record model="ir.ui.view" id="project_task_code_kanban_view">
         <field name="name">project.task.code.kanban</field>
         <field name="model">project.task</field>
-        <field name="inherit_id" ref="project.view_task_kanban"/>
+        <field name="inherit_id" ref="project_task_code.project_task_code_kanban_view"/>
         <field name="arch" type="xml">
-            <field name="name" position="after">
-                <field name="origin"/>
+            <field name="code" position="before">
+                <field name="origin" invisible="1"/>     
+                <i class="fa fa-bug" aria-hidden="true" style="color:red" 
+                    attrs="{'invisible':[('origin', '!=', 'issue')]}"
+                    title="Incidente"></i>
+                <i class="fa fa-lightbulb-o" aria-hidden="true" style="color:#f2bd2b" 
+                    attrs="{'invisible':[('origin', '!=', 'feature')]}"
+                    title="Implementação"></i>
             </field>
         </field>
     </record>
@@ -52,18 +58,4 @@
             </filter>
         </field>
     </record>
-
-    <record model="ir.ui.view" id="project_task_code_kanban_view">
-        <field name="name">project.task.code.kanban</field>
-        <field name="model">project.task</field>
-        <field name="inherit_id" ref="project.view_task_kanban"/>
-        <field name="arch" type="xml">
-            <field name="name" position="after">
-                <div>
-                    <field name="origin"/>
-                </div>
-            </field>
-        </field>
-    </record>
-
 </odoo>
