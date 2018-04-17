@@ -20,7 +20,7 @@ msgstr ""
 #. module: project_task_origin
 #: model:ir.ui.view,arch_db:project_task_origin.view_project_kanban
 msgid "<strong class=\"small\">Features:</strong>"
-msgstr "<strong class=\"small\">Melhorias:</strong>"
+msgstr "<strong class=\"small\">Implementações:</strong>"
 
 #. module: project_task_origin
 #: model:ir.ui.view,arch_db:project_task_origin.view_project_kanban
@@ -30,12 +30,12 @@ msgstr "<strong class=\"small\">Incidentes:</strong>"
 #. module: project_task_origin
 #: selection:project.task,origin:0
 msgid "Feature"
-msgstr "Melhoria"
+msgstr "Implementação"
 
 #. module: project_task_origin
 #: model:ir.ui.view,arch_db:project_task_origin.view_task_search_form
 msgid "Features"
-msgstr "Melhorias"
+msgstr "Implementações"
 
 #. module: project_task_origin
 #: selection:project.task,origin:0
@@ -66,7 +66,7 @@ msgstr "Tarefa"
 #. module: project_task_origin
 #: model:ir.model.fields,field_description:project_task_origin.field_project_project_task_origin_feature_count
 msgid "Task Origin Feature Count"
-msgstr "Contador das Tarefas de Origem Melhorias"
+msgstr "Contador das Tarefas de Origem Implementações"
 
 #. module: project_task_origin
 #: model:ir.model.fields,field_description:project_task_origin.field_project_project_task_origin_issue_count
