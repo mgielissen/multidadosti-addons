@@ -1,6 +1,10 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <odoo>
 
+    <menuitem id="account.menu_action_invoice_tree1" 
+                parent="sale.sale_order_menu" 
+                sequence="1"/>
+
     <record id="sale.menu_sale_order_upselling" model="ir.ui.menu">
         <field name="active" eval="False"/>
     </record>

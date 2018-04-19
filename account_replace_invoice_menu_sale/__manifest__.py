@@ -14,11 +14,10 @@
     'depends': [
         'account_replace_invoice_menu',
         'sale',
-        'tko_contacts',
     ],
+
     'data': [
         'views/sale.xml',
-        'views/contacts.xml',
     ],
     'installable': True,
     'auto_install': False,
