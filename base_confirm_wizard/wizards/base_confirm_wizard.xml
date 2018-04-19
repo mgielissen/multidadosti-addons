@@ -27,7 +27,6 @@
                 <div id="confirm_wizard_message">
                     <field name="message"/>
                 </div>
-                <p>PS:This action cannot be reversed</p>
                 <footer>
                     <button class="oe_highlight" type="object" name="no" string="No" />
                     <button class="oe_highlight" type="object" name="yes" string="Yes" />
