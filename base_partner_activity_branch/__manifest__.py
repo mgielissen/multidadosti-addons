@@ -14,6 +14,7 @@
     'depends': [
         'base',
         'account_replace_invoice_menu_sale',
+        'tko_contacts',
     ],
     'data': [
         'security/ir.model.access.csv',
