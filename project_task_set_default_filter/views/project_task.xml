@@ -19,7 +19,7 @@
                 </attribute>
             </xpath>
             <xpath expr="//search/field[@name='name']" position="after">
-                <field name="name" string="Name"/>
+                <field name="code" string="Code"/>
             </xpath>
         </field>
     </record>
