@@ -9,4 +9,11 @@
         <field name="domain">[('state','in',('draft','sent','bid','cancel','confirmed'))]</field>
     </record>
 
+    <menuitem id="account.menu_finance_payables_master_data" active="False"/>
+
+    <menuitem id="account.menu_finance_payables_documents"
+        name="Documents"
+        parent="purchase.menu_procurement_management"
+        sequence="1"/>
+
 </odoo>
