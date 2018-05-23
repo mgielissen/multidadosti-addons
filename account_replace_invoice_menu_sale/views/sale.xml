@@ -4,6 +4,11 @@
     <menuitem id="account.menu_action_invoice_tree1" 
                 parent="sale.sale_order_menu" 
                 sequence="1"/>
+                
+    <menuitem id="account.menu_finance_receivables"
+            name="Sales"
+            parent="sale.sale_menu_root"
+            sequence="2"/>
 
     <record id="sale.menu_sale_order_upselling" model="ir.ui.menu">
         <field name="active" eval="False"/>
