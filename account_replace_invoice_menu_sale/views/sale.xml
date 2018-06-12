@@ -2,7 +2,7 @@
 <odoo>
 
     <menuitem id="account.menu_action_invoice_tree1" 
-                parent="sale.sale_order_menu" 
+                parent="sale.menu_sale_invoicing" 
                 sequence="1"/>
                 
     <menuitem id="account.menu_finance_receivables"
@@ -18,8 +18,27 @@
         <field name="active" eval="False"/>
     </record>
 
-    <record id="sale.menu_sale_invoicing" model="ir.ui.menu">
+    <record id="account.product_product_menu_sellable" model="ir.ui.menu">
         <field name="active" eval="False"/>
     </record>
 
+    <record id="sale.menu_sale_invoicing" model="ir.ui.menu">
+        <field name="active" eval="True"/>
+    </record>
+
+    <menuitem id="br_account_einvoice.menu_action_sped_base_electronic_doc" 
+            parent="sale.menu_sale_invoicing" 
+            sequence="2"/>
+
+    <menuitem id="br_account.menu_action_br_account_fiscal_document_form" 
+            parent="sale.menu_sale_invoicing" 
+            sequence="3"/>
+
+    <menuitem id="br_account.menu_action_document_serie_form" 
+            parent="sale.menu_sale_invoicing" 
+            sequence="4"/>
+
+    <menuitem id="account.menu_action_invoice_out_refund" 
+            parent="sale.menu_sale_invoicing"
+            sequence="8"/>
 </odoo>

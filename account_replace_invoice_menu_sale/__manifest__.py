@@ -14,6 +14,7 @@
     'depends': [
         'account_replace_invoice_menu',
         'sale',
+        'br_account_einvoice',
     ],
 
     'data': [
