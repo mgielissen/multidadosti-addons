@@ -1,6 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
 <odoo>
 
+    <record id="view_account_payment_tree" model="ir.ui.view">
+        <field name="name">account.payment.inherit.view.tree</field>
+        <field name="model">account.payment</field>
+        <field name="inherit_id" ref="br_account_payment.view_account_payment_tree"/>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='journal_id']" position="after">
+                <field name="general_account_id"/>
+            </xpath>
+
+        </field>
+    </record>
+
     <record id="view_br_account_payment_payment_form_inherit" model="ir.ui.view">
         <field name="name">account.detached.payment.form.inherit</field>
         <field name="model">account.payment</field>
@@ -9,11 +21,8 @@
             <field name="payment_transaction_id" position="replace"/>
 
             <xpath expr="//field[@name='journal_id']" position="after">
-                <field name="general_account_id"
-                       attrs="{'required': [('payment_type', 'in', ('inbound', 'outbound')),('state', '=', 'draft')], 'invisible': ['|',('payment_type', 'not in', ('inbound', 'outbound')),'&amp;',('state', '!=', 'draft'),('general_account_id', '=', False)], 'readonly': [('state', '!=', 'draft')]}"/>
-                <field name="analytic_account_id"
-                       groups="analytic.group_analytic_accounting"
-                       attrs="{'invisible': [('state', '!=', 'draft'), ('analytic_account_id', '=', False)], 'readonly': [('state', '!=', 'draft')]}"/>
+                <field name="general_account_id" attrs="{'required': [('payment_type', 'in', ('inbound', 'outbound')),('state', '=', 'draft')], 'invisible': ['|',('payment_type', 'not in', ('inbound', 'outbound')),'&amp;',('state', '!=', 'draft'),('general_account_id', '=', False)], 'readonly': [('state', '!=', 'draft')]}"/>
+                <field name="analytic_account_id" groups="analytic.group_analytic_accounting" attrs="{'invisible': [('state', '!=', 'draft'), ('analytic_account_id', '=', False)], 'readonly': [('state', '!=', 'draft')]}"/>
             </xpath>
 
             <xpath expr="//group" position="after">
@@ -44,10 +53,24 @@
         <field name="domain" eval="False"/>
     </record>
 
-    <menuitem action="account.action_account_payments" id="menu_action_account_payments"
-              parent="br_account_payment.menu_br_payments"
-              name="Financial Moves"
-              sequence="20"
-              groups="account.group_account_user"/>
+    <record id="action_account_financial_moves" model="ir.actions.act_window">
+        <field name="name">Financial Moves</field>
+        <field name="res_model">account.payment</field>
+        <field name="view_type">form</field>
+        <field name="view_mode">tree,kanban,form,graph</field>
+        <field name="context">{'default_payment_type': 'inbound', 'default_partner_type': 'customer'}</field>
+        <field name="view_id" ref="view_account_payment_tree"/>
+        <field name="help" type="html">
+            <p class="oe_view_nocontent_create">
+                  Click to register a payment
+            </p>
+            <p>
+                  Payments are used to register liquidity movements (send, collect or transfer money).
+                  You can then process those payments by your own means or by using installed facilities.
+            </p>
+        </field>
+    </record>
+
+    <menuitem action="action_account_financial_moves" id="menu_action_account_payments" parent="br_account_payment.menu_br_payments" name="Financial Moves" sequence="20" groups="account.group_account_user"/>
 
 </odoo>
