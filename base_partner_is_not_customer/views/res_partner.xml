@@ -7,8 +7,6 @@
         <field name="inherit_id" ref="br_base.view_br_base_partner_form"/>
         <field name="arch" type="xml">
 
-            <field name="user_id" position="replace"/>
-
             <xpath expr="//label[@for='street']" position="before">
                     <field string="Relation User" name="user_id" readonly="1"/>
             </xpath>
