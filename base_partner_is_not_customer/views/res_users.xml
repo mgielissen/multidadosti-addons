@@ -2,7 +2,7 @@
 <odoo>
 
     <!-- res.users -->
-    <record id="view_users_form_simple_modif" model="ir.ui.view">
+    <!-- <record id="view_users_form_simple_modif" model="ir.ui.view">
         <field name="name">base.partner.not.customer.res.users.form</field>
         <field name="model">res.users</field>
         <field name="inherit_id" ref="base.view_users_form_simple_modif"/>
@@ -12,15 +12,15 @@
                 <attribute name="class">btn-primary</attribute>
             </xpath>
         </field>
-    </record>
+    </record> -->
 
-    <record id="view_users_form" model="ir.ui.view">
+    <!-- <record id="view_users_form" model="ir.ui.view">
         <field name="name">res.users.form</field>
         <field name="model">res.users</field>
         <field name="inherit_id" ref="base.view_users_form"/>
         <field name="arch" type="xml">
             <field name="partner_id" position="replace"/>
         </field>
-    </record>
+    </record> -->
 
 </odoo>
