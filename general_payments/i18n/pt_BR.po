@@ -47,7 +47,7 @@ msgstr "Descrição"
 #: model:ir.actions.act_window,name:general_payments.action_account_financial_moves
 #: model:ir.ui.menu,name:general_payments.menu_action_account_payments
 msgid "Financial Moves"
-msgstr "Movimentações Finânceiras"
+msgstr "Movimentações Financeiras"
 
 #. module: general_payments
 #: model:ir.model,name:general_payments.model_account_payment
