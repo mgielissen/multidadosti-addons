@@ -15,19 +15,9 @@ class AccountPayment(models.Model):
 
     description = fields.Text(string='Description')
 
-    @api.multi
-    @api.depends('invoice_ids', 'payment_type', 'partner_type', 'partner_id')
-    def _compute_destination_account_id(self):
-        super(AccountPayment, self)._compute_destination_account_id()
-
-        for rec in self:
-            if rec.general_account_id:
-                rec.destination_account_id = rec.general_account_id.id
-
     @api.onchange('payment_type')
     def _onchange_payment_type(self):
         res = super(AccountPayment, self)._onchange_payment_type()
-
         if not self.invoice_ids and not self.payment_type == 'transfer':
             # Set account_account prefix
             if self.payment_type == 'inbound':
