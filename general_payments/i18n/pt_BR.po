@@ -6,8 +6,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 11.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-07-04 14:48+0000\n"
-"PO-Revision-Date: 2018-07-04 11:49-0300\n"
+"POT-Creation-Date: 2018-07-11 21:00+0000\n"
+"PO-Revision-Date: 2018-07-11 18:06-0300\n"
 "Last-Translator: <>\n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
@@ -33,6 +33,13 @@ msgid "Click to register a payment"
 msgstr "Clique para registrar um pagamento."
 
 #. module: general_payments
+#: code:addons/general_payments/models/account_payment.py:33
+#: code:addons/general_payments/tests/test_account_payment.py:173
+#, python-format
+msgid "Customer"
+msgstr "Cliente"
+
+#. module: general_payments
 #: model:ir.ui.view,arch_db:general_payments.view_br_account_payment_payment_form_inherit
 msgid "Código de Referência"
 msgstr "Código de Referência"
@@ -50,6 +57,18 @@ msgid "Financial Moves"
 msgstr "Movimentações Financeiras"
 
 #. module: general_payments
+#: model:ir.model.fields,field_description:general_payments.field_account_payment_payment_amount_original
+msgid "Original Value"
+msgstr "Valor Original"
+
+#. module: general_payments
+#: code:addons/general_payments/models/account_payment.py:32
+#: code:addons/general_payments/tests/test_account_payment.py:173
+#, python-format
+msgid "Payment"
+msgstr "Pagamento"
+
+#. module: general_payments
 #: model:ir.model,name:general_payments.model_account_payment
 msgid "Payments"
 msgstr "Pagamentos"
@@ -64,7 +83,43 @@ msgstr ""
 "Você pode então processar os pagamentos por seus próprios meios ou através de facilidades instaladas."
 
 #. module: general_payments
-#: code:addons/general_payments/models/account_payment.py:66
+#: code:addons/general_payments/models/account_payment.py:143
+#, python-format
+msgid "Please activate the sequence of selected journal!"
+msgstr "Por favor, ative a sequencia do diário selecionado!"
+
+#. module: general_payments
+#: code:addons/general_payments/models/account_payment.py:151
+#, python-format
+msgid "Please define a sequence on the journal."
+msgstr "Por favor defina uma sequencia para o diário."
+
+#. module: general_payments
+#: code:addons/general_payments/models/account_payment.py:32
+#: code:addons/general_payments/tests/test_account_payment.py:195
+#, python-format
+msgid "Receivement"
+msgstr "Recebimento"
+
+#. module: general_payments
+#: model:ir.ui.view,arch_db:general_payments.view_br_account_payment_payment_form_inherit
+msgid "Reverse"
+msgstr "Extornar"
+
+#. module: general_payments
+#: code:addons/general_payments/models/account_payment.py:34
+#: code:addons/general_payments/tests/test_account_payment.py:195
+#, python-format
+msgid "Supplier"
+msgstr "Fornecedor"
+
+#. module: general_payments
+#: model:ir.ui.view,arch_db:general_payments.view_br_account_payment_payment_form_inherit
+msgid "This action will revert this payment, which will deletes                             all move records created, are you sure this?"
+msgstr "Esta ação ira reverter este pagamento, que irá deletar                             todas as movimentações atreladas ao registro, esta certo disso ?"
+
+#. module: general_payments
+#: code:addons/general_payments/models/account_payment.py:172
 #, python-format
 msgid "You can not make a transfer to the same journal"
 msgstr "Você não pode efetuar uma transferência para o mesmo diário."
