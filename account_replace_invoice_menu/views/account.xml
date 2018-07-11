@@ -43,4 +43,7 @@
         <field name="active" eval="False"/>
     </record>
 
+    <!-- Move menu Configurações - Contabilidade para o menu Conselheiro -->
+    <menuitem id="account.account_account_menu" name="Accounting" parent="account.menu_finance_entries" sequence="2" groups="account.group_account_invoice"/>
+
 </odoo>
