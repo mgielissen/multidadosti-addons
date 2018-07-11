@@ -58,7 +58,7 @@
         <field name="res_model">account.payment</field>
         <field name="view_type">form</field>
         <field name="view_mode">tree,kanban,form,graph</field>
-        <field name="context">{'default_payment_type': 'inbound', 'default_partner_type': 'customer'}</field>
+        <field name="context">{'default_payment_type': 'inbound', 'default_partner_type': 'customer', 'financial_move': True}</field>
         <field name="view_id" ref="view_account_payment_tree"/>
         <field name="help" type="html">
             <p class="oe_view_nocontent_create">
