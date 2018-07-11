@@ -62,6 +62,10 @@
         </field>
     </record>
 
+    <record id="payment.view_account_payment_form_inherit_payment" model="ir.ui.view">
+        <field name="active" eval="False"/>
+    </record>
+
     <record id="account.menu_action_account_payments_receivable" model="ir.ui.menu">
         <field name="active" eval="False"/>
     </record>
