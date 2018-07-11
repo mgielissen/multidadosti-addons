@@ -30,26 +30,6 @@ class AccountPayment(models.Model):
 
         return res
 
-    def _get_shared_move_line_vals(self, debit, credit, amount_currency,
-                                   move_id, invoice_id=False):
-        """
-            Returns values common to both move lines (except for debit, credit
-            and amount_currency which are reversed)
-        """
-        res = super(AccountPayment, self)._get_shared_move_line_vals(
-            debit, credit, amount_currency, move_id, invoice_id=invoice_id)
-
-        if self.invoice_ids:
-
-            for inv in self.invoice_ids:
-                self.analytic_account_id = \
-                    inv.invoice_line_ids[0].account_analytic_id.id
-
-        # if not self.invoice_ids:
-        res['analytic_account_id'] = self.analytic_account_id.id
-        res['partner_id'] = self.partner_id.id
-        return res
-
     @api.constrains('destination_journal_id', 'journal_id')
     def _check_destination_journal_id(self):
         if self.destination_journal_id == self.journal_id:
