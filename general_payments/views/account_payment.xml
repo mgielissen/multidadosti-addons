@@ -18,7 +18,28 @@
         <field name="model">account.payment</field>
         <field name="inherit_id" ref="br_account_payment.view_br_account_payment_payment_cancel_form_inherit"/>
         <field name="arch" type="xml">
-            <field name="payment_transaction_id" position="replace"/>
+
+            <button name="cancel" position="attributes">
+                <attribute name="attrs">
+                    {'invisible': ['|',
+                        ('state', 'in', ['draft','cancelled']),
+                        ('invoice_ids', '=', [])]}
+                </attribute>
+            </button>
+
+            <button name="cancel" position="after">
+                <field name="invoice_ids" invisible="1"/>
+                <button name="reverse"
+                        string="Reverse"
+                        confirm="This action will revert this payment, which will deletes
+                            all move records created, are you sure this?"
+                        type="object"
+                        class="oe_highlight"
+                        attrs="{'invisible': ['|',
+                            ('state', 'in', ['draft','cancelled']),
+                            ('invoice_ids', '!=', [])]}"/>
+            </button>
+
 
             <xpath expr="//field[@name='journal_id']" position="after">
                 <field name="general_account_id" attrs="{'required': [('payment_type', 'in', ('inbound', 'outbound')),('state', '=', 'draft')], 'invisible': ['|',('payment_type', 'not in', ('inbound', 'outbound')),'&amp;',('state', '!=', 'draft'),('general_account_id', '=', False)], 'readonly': [('state', '!=', 'draft')]}"/>
