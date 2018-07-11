@@ -45,3 +45,9 @@ msgstr "Cadastro"
 #: model:ir.ui.menu,name:account.menu_finance_entries
 msgid "Adviser"
 msgstr "Contabilidade"
+
+#. module: account_replace_invoice_menu
+#: model:ir.actions.act_window,name:account_replace_invoice_menu.product_template_action_service
+#: model:ir.ui.menu,name:account_replace_invoice_menu.product_template_menu_service
+msgid "Services"
+msgstr "Serviços"
