@@ -1,11 +1,16 @@
+from datetime import datetime
+
 from odoo import api, fields, models
 from odoo.tools.translate import _
-from odoo.exceptions import ValidationError
+from odoo.exceptions import UserError, ValidationError
 
 
 class AccountPayment(models.Model):
 
     _inherit = 'account.payment'
+
+    payment_amount_original = fields.Monetary(string='Original Value',
+                                              readonly=True)
 
     general_account_id = fields.Many2one(comodel_name='account.account',
                                          string='Account')
