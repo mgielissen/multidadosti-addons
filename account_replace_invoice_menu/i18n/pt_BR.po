@@ -40,3 +40,8 @@ msgstr ""
 #: model:ir.ui.menu,name:account_replace_invoice_menu.menu_finance_register
 msgid "Register"
 msgstr "Cadastro"
+
+#. module: account
+#: model:ir.ui.menu,name:account.menu_finance_entries
+msgid "Adviser"
+msgstr "Contabilidade"
