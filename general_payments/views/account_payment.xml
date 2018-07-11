@@ -16,7 +16,7 @@
     <record id="view_br_account_payment_payment_form_inherit" model="ir.ui.view">
         <field name="name">account.detached.payment.form.inherit</field>
         <field name="model">account.payment</field>
-        <field name="inherit_id" ref="br_account_payment.view_br_account_payment_payment_form_inherit"/>
+        <field name="inherit_id" ref="br_account_payment.view_br_account_payment_payment_cancel_form_inherit"/>
         <field name="arch" type="xml">
             <field name="payment_transaction_id" position="replace"/>
 
