@@ -77,8 +77,12 @@ class AccountPayment(models.Model):
     @api.multi
     def post(self):
         for rec in self:
+            context = dict(rec._context or {})
             # Valid only in receivement('outbound') or payment('inbound')
-            is_financial_move = self.env.context.get('financial_move', False)
+            ctx_move = context.get('financial_move', False)
+            active_model = context.get('active_model', False)
+            is_financial_move = (
+                True if ctx_move and active_model != 'account.move' else False)
             if rec.payment_type != 'transfer' and is_financial_move:
                 # Creates the 'launch' move record to link with payment move 
                 # generated through 'account.payment' record creation
@@ -91,10 +95,8 @@ class AccountPayment(models.Model):
                 })
                 # Calls super method as if it had been called in 'account.move'
                 # view.
-                ctx = {
-                    'active_model': 'account.move',
-                }
-                super(AccountPayment, rec).with_context(ctx).post()
+                context['active_model'] = 'account.move'
+                super(AccountPayment, rec).with_context(context).post()
             else:
                 rec.payment_amount_original = rec.move_id.amount
                 super(AccountPayment, rec).post()
