@@ -66,7 +66,6 @@ class AccountPayment(models.Model):
 
         # Create account.move dict
         move_values = {
-            'name': self._get_journal_entry_name(self.journal_id, date_now),
             'journal_id': self.journal_id.id,
             'account_id': move_account.id,
             'date': date_now,
@@ -122,30 +121,6 @@ class AccountPayment(models.Model):
                 rec.move_id.unlink()
                 # Turns the payment state to draft
                 rec.action_draft()
-
-    @staticmethod
-    def _get_journal_entry_name(journal, date):
-        """Generates a name, based in sequence used in 'journal' param related,
-        and date param.
-        
-        Arguments:
-            journal {object} -- Account journal record.
-            date {str} -- Processing date of record.
-        
-        Raises:
-            UserError -- Journal record must have sequence active.
-        
-        Returns:
-            str -- Name which will be used in title
-        """
-        if not journal.sequence_id.active:
-            raise UserError(_(
-                'Please activate the sequence of selected '
-                'journal!'))
-
-        # Get sequence of journal
-        return journal.sequence_id.with_context(
-            ir_sequence_date=str(date)).next_by_id()
 
     @api.onchange('payment_type')
     def _onchange_payment_type(self):

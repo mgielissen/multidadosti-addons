@@ -165,16 +165,16 @@ class TestAccountPayment(TransactionCase):
                          self.customer_receivable_account.id)
         self.assertEqual(customer_vals['journal_id'],
                          self.customer_payment.journal_id.id)
-        
+
         customer_line = self._get_line_from_move_dict(customer_vals)
-        
+
         self.assertEqual(customer_line['name'],
                          '%s - %s' % (_('Payment'), _('Customer')))
         self.assertEqual(customer_line['debit'], self.customer_payment.amount)
         self.assertEqual(customer_line['partner_id'], self.customer.id)
         self.assertEqual(customer_line['account_id'],
                          self.customer_receivable_account.id)
-        
+
         customer_balance_line = self._get_line_from_move_dict(
             customer_vals, False)
 
@@ -229,21 +229,6 @@ class TestAccountPayment(TransactionCase):
         self.assertEqual(len(self.env['account.move'].search([]).ids), False)
 
         self.assertEqual(self.supplier_payment.state, 'draft')
-
-    def test__get_journal_entry_name(self):
-
-        journal_payment = self.supplier_payment.journal_id
-        journal_payment.sequence_id.active = False
-
-        # Journal sequence must be active, otherwise an error is raised
-        with self.assertRaises(UserError):
-            self.supplier_payment._get_journal_entry_name(
-                journal_payment, '2017-11-21')
-
-        journal_payment.sequence_id.active = True
-
-        self.supplier_payment._get_journal_entry_name(
-            journal_payment, '2017-11-21')
 
     def test__onchange_payment_type(self):
         res = self.payment_transfer._onchange_payment_type()
