@@ -1,4 +1,5 @@
 # -*- coding: utf-8 -*-
+from unittest import mock
 
 from odoo.exceptions import UserError, ValidationError
 from odoo.tests.common import TransactionCase
@@ -202,6 +203,74 @@ class TestAccountPayment(TransactionCase):
 
         self.assertEqual(supplier_balance_line['account_id'],
                          self.supplier_payable_account.id)
+    
+    def test__get_liquidity_launch_aml_vals(self):
+        res = self.customer_payment._get_liquidity_launch_aml_vals(
+            is_payment=True)
+
+        self.assertEqual(
+            res['account_id'], self.customer_receivable_account.id)
+        self.assertEqual(
+            res['name'], '%s - %s' % (_('Customer'), _('Revenue')))
+
+        res = self.customer_payment._get_liquidity_launch_aml_vals(
+            is_payment=False)
+
+        self.assertEqual(
+            res['account_id'], self.supplier_payable_account.id)
+        self.assertEqual(
+            res['name'], '%s - %s' % (_('Customer'), _('Expense')))
+
+        res = self.supplier_payment._get_liquidity_launch_aml_vals(
+            is_payment=False)
+
+        self.assertEqual(
+            res['account_id'], self.supplier_payable_account.id)
+        self.assertEqual(
+            res['name'], '%s - %s' % (_('Supplier'), _('Expense')))
+
+        res = self.supplier_payment._get_liquidity_launch_aml_vals(
+            is_payment=True)
+
+        self.assertEqual(
+            res['account_id'], self.customer_receivable_account.id)
+        self.assertEqual(
+            res['name'], '%s - %s' % (_('Supplier'), _('Revenue')))
+    
+    def test__get_counterpart_launch_aml_vals(self):
+        res = self.customer_payment._get_counterpart_launch_aml_vals()
+        self.assertEqual(res['account_id'], self.revenue_account.id)
+
+        res = self.supplier_payment._get_counterpart_launch_aml_vals()
+        self.assertEqual(res['account_id'], self.expense_account.id)
+
+    def test__get_liquidity_account(self):
+        acc_id = self.customer_payment._get_liquidity_account(is_payment=True)
+        self.assertEqual(acc_id, self.customer_receivable_account.id)
+
+        acc_id = self.customer_payment._get_liquidity_account(is_payment=False)
+        self.assertEqual(acc_id, self.supplier_payable_account.id)
+
+    @mock.patch('odoo.addons.general_payments.models.account_payment.'
+                'AccountPayment._get_liquidity_launch_aml_vals')
+    @mock.patch('odoo.addons.general_payments.models.account_payment.'
+                'AccountPayment._get_counterpart_launch_aml_vals')
+    def test__get_launch_aml_vals(self, _get_liquidity_launch_aml_vals,
+        _get_counterpart_launch_aml_vals):
+        
+        self.customer_payment._get_launch_aml_vals(
+            is_payment=True, is_debit_line=True)
+        self.customer_payment._get_launch_aml_vals(
+            is_payment=True, is_debit_line=False)
+        self.customer_payment._get_launch_aml_vals(
+            is_payment=False, is_debit_line=True)
+        self.customer_payment._get_launch_aml_vals(
+            is_payment=False, is_debit_line=False)
+
+        self.assertEqual(
+            len(_get_liquidity_launch_aml_vals.mock_calls), 2)
+        self.assertEqual(
+            len(_get_counterpart_launch_aml_vals.mock_calls), 2)
 
     def test_post(self):
         ctx = {

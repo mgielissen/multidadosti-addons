@@ -29,12 +29,6 @@ class AccountPayment(models.Model):
         """
         is_payment = True if self.payment_type == 'inbound' else False
 
-        payment_part_name = (_('Payment') if is_payment else _('Receivement'))
-        partner_part_name = (_('Customer') if self.partner_type == 'customer'
-            else _('Supplier'))
-
-        name = '%s - %s' % (payment_part_name, partner_part_name)
-
         date_now = datetime.strftime(datetime.now(), '%Y-%m-%d')
 
         account_move_lines_base_dict = {
@@ -45,34 +39,75 @@ class AccountPayment(models.Model):
         ml_debit = {
             **account_move_lines_base_dict,
             'debit': self.amount,
+            **self._get_launch_aml_vals(is_payment, is_debit_line=True),
         }
         ml_credit = {
             **account_move_lines_base_dict,
             'credit': self.amount,
+            **self._get_launch_aml_vals(is_payment, is_debit_line=False),
         }
-
-        if is_payment:
-            move_account = self.partner_id.property_account_receivable_id
-            ml_debit['name'] = name
-            ml_debit['account_id'] = move_account.id
-            ml_debit['analytic_account_id'] = self.analytic_account_id.id
-            ml_credit['account_id'] = self.general_account_id.id
-        else:
-            move_account = self.partner_id.property_account_payable_id
-            ml_credit['name'] = name
-            ml_credit['account_id'] = move_account.id
-            ml_credit['analytic_account_id'] = self.analytic_account_id.id
-            ml_debit['account_id'] = self.general_account_id.id
 
         # Create account.move dict
         move_values = {
             'journal_id': self.journal_id.id,
-            'account_id': move_account.id,
+            'account_id': self._get_liquidity_account(is_payment),
             'date': date_now,
             'line_ids': [(0, 0, ml_credit), (0, 0, ml_debit)],
         }
 
         return move_values
+    
+    def _get_liquidity_launch_aml_vals(self, is_payment):
+        """Generates a proper dict containing aml values to create the 
+        liquidity move line record through 'account.payment' record creation.
+        
+        Arguments:
+            is_payment {bool} -- Verifies if the record is launching an expense
+                or a revenue
+        
+        Returns:
+            dict -- AML Liquidity values
+        """
+        if is_payment:
+            payment_part_name = _('Revenue')
+        else:
+            payment_part_name = _('Expense')
+
+        partner_part_name = (_('Customer') if self.partner_type == 'customer'
+                             else _('Supplier'))
+        name = '%s - %s' % (partner_part_name, payment_part_name)
+
+        return {
+            'name': name,
+            'account_id': self._get_liquidity_account(is_payment),
+            'analytic_account_id': self.analytic_account_id.id,
+        }
+
+    def _get_counterpart_launch_aml_vals(self):
+        """Generates a proper dict containing aml values to create the 
+        counterpart move line record through 'account.payment' record creation.
+        
+        Returns:
+            dict -- AML Liquidity values
+        """
+        return {
+            'account_id': self.general_account_id.id,
+        }
+    
+    def _get_liquidity_account(self, is_payment):
+        if is_payment:
+            return self.partner_id.property_account_receivable_id.id
+        else:
+            return self.partner_id.property_account_payable_id.id
+
+    def _get_launch_aml_vals(self, is_payment, is_debit_line):
+        # Depending on 'is_payment' value, will return dict of payment move
+        # values or receivement move values to balance the payment record
+        if (is_debit_line and is_payment) or (
+            not is_debit_line and not is_payment):
+            return self._get_liquidity_launch_aml_vals(is_payment)
+        else:
+            return self._get_counterpart_launch_aml_vals()
 
     @api.multi
     def post(self):
