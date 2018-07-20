@@ -71,6 +71,24 @@ class AccountPayment(models.Model):
         Returns:
             dict -- AML Liquidity values
         """
+        return {
+            'name': self._get_liquidity_launch_aml_name(is_payment),
+            'account_id': self._get_liquidity_account(is_payment),
+            'analytic_account_id': self.analytic_account_id.id,
+            'analytic_tag_ids': [(6, 0, self.analytic_tag_ids.ids)],
+        }
+    
+    def _get_liquidity_launch_aml_name(self, is_payment):
+        """Generates a proper name to liquidity move line record which will be 
+        created through 'account.payment' record creation.
+        
+        Arguments:
+            is_payment {bool} -- Verifies if the record is launching an expense
+                or a revenue
+        
+        Returns:
+            str -- AML Liquidity name
+        """
         if is_payment:
             payment_part_name = _('Revenue')
         else:
@@ -78,13 +96,7 @@ class AccountPayment(models.Model):
 
         partner_part_name = (_('Customer') if self.partner_type == 'customer'
                              else _('Supplier'))
-        name = '%s - %s' % (partner_part_name, payment_part_name)
-
-        return {
-            'name': name,
-            'account_id': self._get_liquidity_account(is_payment),
-            'analytic_account_id': self.analytic_account_id.id,
-        }
+        return '%s - %s' % (partner_part_name, payment_part_name)
 
     def _get_counterpart_launch_aml_vals(self):
         """Generates a proper dict containing aml values to create the 

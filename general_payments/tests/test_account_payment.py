@@ -181,8 +181,6 @@ class TestAccountPayment(TransactionCase):
 
         customer_line = self._get_line_from_move_dict(customer_vals)
 
-        self.assertEqual(customer_line['name'],
-                         '%s - %s' % (_('Payment'), _('Customer')))
         self.assertEqual(customer_line['debit'], self.customer_payment.amount)
         self.assertEqual(customer_line['partner_id'], self.customer.id)
         self.assertEqual(customer_line['account_id'],
@@ -203,8 +201,6 @@ class TestAccountPayment(TransactionCase):
 
         supplier_line = self._get_line_from_move_dict(supplier_vals)
 
-        self.assertEqual(supplier_line['name'],
-                         '%s - %s' % (_('Receivement'), _('Supplier')))
         self.assertEqual(supplier_line['credit'], self.supplier_payment.amount)
         self.assertEqual(supplier_line['partner_id'], self.supplier.id)
         self.assertEqual(supplier_line['account_id'],
@@ -216,38 +212,30 @@ class TestAccountPayment(TransactionCase):
         self.assertEqual(supplier_balance_line['account_id'],
                          self.supplier_payable_account.id)
     
-    def test__get_liquidity_launch_aml_vals(self):
-        res = self.customer_payment._get_liquidity_launch_aml_vals(
+    def test__get_liquidity_launch_aml_name(self):
+        name = self.customer_payment._get_liquidity_launch_aml_name(
             is_payment=True)
 
         self.assertEqual(
-            res['account_id'], self.customer_receivable_account.id)
-        self.assertEqual(
-            res['name'], '%s - %s' % (_('Customer'), _('Revenue')))
+            name, '%s - %s' % (_('Customer'), _('Revenue')))
 
-        res = self.customer_payment._get_liquidity_launch_aml_vals(
+        name = self.customer_payment._get_liquidity_launch_aml_name(
             is_payment=False)
 
         self.assertEqual(
-            res['account_id'], self.supplier_payable_account.id)
-        self.assertEqual(
-            res['name'], '%s - %s' % (_('Customer'), _('Expense')))
+            name, '%s - %s' % (_('Customer'), _('Expense')))
 
-        res = self.supplier_payment._get_liquidity_launch_aml_vals(
+        name = self.supplier_payment._get_liquidity_launch_aml_name(
             is_payment=False)
 
         self.assertEqual(
-            res['account_id'], self.supplier_payable_account.id)
-        self.assertEqual(
-            res['name'], '%s - %s' % (_('Supplier'), _('Expense')))
+            name, '%s - %s' % (_('Supplier'), _('Expense')))
 
-        res = self.supplier_payment._get_liquidity_launch_aml_vals(
+        name = self.supplier_payment._get_liquidity_launch_aml_name(
             is_payment=True)
 
         self.assertEqual(
-            res['account_id'], self.customer_receivable_account.id)
-        self.assertEqual(
-            res['name'], '%s - %s' % (_('Supplier'), _('Revenue')))
+            name, '%s - %s' % (_('Supplier'), _('Revenue')))
     
     def test__get_counterpart_launch_aml_vals(self):
         res = self.customer_payment._get_counterpart_launch_aml_vals()
@@ -262,6 +250,23 @@ class TestAccountPayment(TransactionCase):
 
         acc_id = self.customer_payment._get_liquidity_account(is_payment=False)
         self.assertEqual(acc_id, self.supplier_payable_account.id)
+
+    @mock.patch('odoo.addons.general_payments.models.account_payment.'
+                'AccountPayment._get_liquidity_account')
+    @mock.patch('odoo.addons.general_payments.models.account_payment.'
+                'AccountPayment._get_liquidity_launch_aml_name')
+    def test__get_liquidity_launch_aml_vals(self, _get_liquidity_account,
+        _get_liquidity_launch_aml_name):
+        res = self.customer_payment._get_liquidity_launch_aml_vals(
+            is_payment=True)
+
+        self.assertEqual(
+            len(_get_liquidity_account.mock_calls), 1)
+        self.assertEqual(
+            len(_get_liquidity_launch_aml_name.mock_calls), 1)
+        self.assertEqual(res['analytic_account_id'], self.analytic_account.id)
+        self.assertEqual(
+            res['analytic_tag_ids'], [(6, 0, [self.analytic_tag.id])])
 
     @mock.patch('odoo.addons.general_payments.models.account_payment.'
                 'AccountPayment._get_liquidity_launch_aml_vals')
