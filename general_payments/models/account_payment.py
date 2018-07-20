@@ -15,8 +15,11 @@ class AccountPayment(models.Model):
     general_account_id = fields.Many2one(comodel_name='account.account',
                                          string='Account')
 
-    analytic_account_id = fields.Many2one('account.analytic.account',
-                                          string='Analytic Account')
+    analytic_account_id = fields.Many2one(string='Analytic Account',
+                                          comodel_name='account.analytic.account')
+
+    analytic_tag_ids = fields.Many2many(string='Analytic Tags',
+                                        comodel_name='account.analytic.tag')
 
     description = fields.Text(string='Description')
 

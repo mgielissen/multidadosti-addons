@@ -117,9 +117,19 @@ class TestAccountPayment(TransactionCase):
             'payment_date': '2018-02-22',
         })
 
+        self.analytic_account = self.env['account.analytic.account'].create({
+            'name': 'Analytic Account',
+        })
+
+        self.analytic_tag = self.env['account.analytic.tag'].create({
+            'name': 'Analytic Tag',
+        })
+
         self.customer_payment = self.env['account.payment'].create({
             'partner_type': 'customer',
             'payment_type': 'inbound',
+            'analytic_account_id': self.analytic_account.id,
+            'analytic_tag_ids': [(6, 0, [self.analytic_tag.id])],
             'general_account_id': self.revenue_account.id,
             'payment_method_id': self.customer_method_id.id,
             'journal_id': self.journalrec_bank.id,
@@ -130,6 +140,8 @@ class TestAccountPayment(TransactionCase):
         self.supplier_payment = self.env['account.payment'].create({
             'partner_type': 'supplier',
             'payment_type': 'outbound',
+            'analytic_account_id': self.analytic_account.id,
+            'analytic_tag_ids': [(6, 0, [self.analytic_tag.id])],
             'general_account_id': self.expense_account.id,
             'payment_method_id': self.supplier_method_id.id,
             'journal_id': self.journalrec_bank.id,

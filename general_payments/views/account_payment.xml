@@ -44,6 +44,7 @@
             <xpath expr="//field[@name='journal_id']" position="after">
                 <field name="general_account_id" attrs="{'required': [('payment_type', 'in', ('inbound', 'outbound')),('state', '=', 'draft')], 'invisible': ['|',('payment_type', 'not in', ('inbound', 'outbound')),'&amp;',('state', '!=', 'draft'),('general_account_id', '=', False)], 'readonly': [('state', '!=', 'draft')]}"/>
                 <field name="analytic_account_id" groups="analytic.group_analytic_accounting" attrs="{'invisible': [('state', '!=', 'draft'), ('analytic_account_id', '=', False)], 'readonly': [('state', '!=', 'draft')]}"/>
+                <field name="analytic_tag_ids" groups="analytic.group_analytic_accounting" attrs="{'invisible': [('state', '!=', 'draft'), ('analytic_tag_ids', '=', [])], 'readonly': [('state', '!=', 'draft')]}" widget="many2many_tags"/>
             </xpath>
 
             <xpath expr="//group" position="after">
