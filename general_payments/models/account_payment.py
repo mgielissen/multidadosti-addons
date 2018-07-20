@@ -134,6 +134,7 @@ class AccountPayment(models.Model):
                 # Calls super method as if it had been called in 'account.move'
                 # view.
                 context['active_model'] = 'account.move'
+                context['move_reference'] = move.id
                 super(AccountPayment, rec).with_context(context).post()
             else:
                 rec.payment_amount_original = rec.move_id.amount
