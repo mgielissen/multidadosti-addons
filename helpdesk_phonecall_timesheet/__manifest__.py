@@ -2,7 +2,7 @@
     'name': 'HelpDesk PhoneCall Timesheet',
     'license': 'LGPL-3',
     'author': 'MultidadosTI',
-    'version': '10.0.1.0.0',
+    'version': '11.0.1.0.0',
     'website': 'www.multidadosti.com.br',
     'summary': """Integration PhoneCall and Timesheet""",
     'category': 'Project',
