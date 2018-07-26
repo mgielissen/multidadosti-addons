@@ -1,6 +1,6 @@
 {
     'name': 'Calendar Event Partner Readonly on Done',
-    'version': '10.0.1.0.0',
+    'version': '11.0.1.0.0',
     'author': 'MultidadosTI',
     'maintainer': 'MultidadosTI',
     'website': 'www.multidadosti.com.br',
