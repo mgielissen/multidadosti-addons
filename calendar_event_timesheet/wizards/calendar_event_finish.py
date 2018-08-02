@@ -32,7 +32,9 @@ class CalendarEventFinish(models.TransientModel):
                 values = self._get_account_analytic_line_values(
                     user=user, calendar_event=ce, start_datetime=dt)
 
-                self.env['account.analytic.line'].create(values)
+                # Utilizamos sudo a fim de permitir que um usuario
+                # crie entradas para outros usuarios
+                self.env['account.analytic.line'].sudo().create(values)
         else:
             raise UserError(_("To finish this event, it must be in 'Open' "
                               "state and select a project"))
