@@ -56,7 +56,7 @@ class CalendarEventFinish(models.TransientModel):
 
         self.ensure_one()
         values = {
-            'name': calendar_event.event_feedback,
+            'name': calendar_event.name,
             'date': start_datetime.date(),
             'user_id': user.id,
             'partner_id': calendar_event.partner_id.id,
