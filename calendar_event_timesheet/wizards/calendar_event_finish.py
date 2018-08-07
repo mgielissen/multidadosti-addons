@@ -10,9 +10,16 @@ class CalendarEventFinish(models.TransientModel):
 
     @api.multi
     def action_finish_calendar_event(self):
-        """Finish Calendar Event and create entry in account.analytic.line
-        table (timesheet).
+        """Finaliza evento de calendário e cria entrada na planilha
+        de horas (account.analytic.line).
+        
+        Raises:
+            UserError -- quando o evento não possui projeto e/ou já esta finalizado.
+        
+        Returns:
+            dict -- dict contendo 'ir.actions.act_window_close'.
         """
+
         self.ensure_one()
         res = super(CalendarEventFinish, self).action_finish_calendar_event()
 
@@ -43,15 +50,16 @@ class CalendarEventFinish(models.TransientModel):
 
     @api.multi
     def _get_account_analytic_line_values(self, user, calendar_event, start_datetime):
-        """Get Account Analytic Line values to use in create method.
+        """Retorna valores para serem usados na criação de uma entrada na planilha
+        de dados (account.analytic.line).
 
         Arguments:
-            user {res.users} -- User to create a entry in timesshet
-            calendar_event {calendar.event} -- Calendar Event to use in entry
-            start_datetime {[type]} -- [description]
+            user {res.users} -- Usuario cujo entrada sera atribuida.
+            calendar_event {calendar.event} -- Calendar Event para ser usado na entrada.
+            start_datetime {datetime} -- objeto datetime com data e hora do evento.
 
         Returns:
-            dict -- dict with values attributes of account.analytic.entry
+            dict -- Dict com valores da account.analytic.entry.
         """
 
         self.ensure_one()
