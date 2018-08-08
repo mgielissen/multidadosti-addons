@@ -12,6 +12,7 @@
     ],
     'depends': [
         'hr_timesheet',
+        'analytic_base_field',
         'helpdesk_phonecall_support',
     ],
     'data': [

@@ -11,6 +11,7 @@
         'Michell Stuttgart <michellstut@gmail.com>',
     ],
     'depends': [
+        'analytic_base_field',
         'calendar_event_feedback',
         'calendar_event_partner_readonly_on_done',
         'calendar_event_project_readonly_on_done',
