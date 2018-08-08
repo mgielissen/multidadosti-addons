@@ -7,7 +7,7 @@
         <field name="inherit_id" ref="calendar_event_partner.view_calendar_event_form"/>
         <field name="arch" type="xml">
 
-            <xpath expr="//field[@name='partner_id']" position="attributes">
+            <xpath expr="//field[@name='customer_partner_id']" position="attributes">
                 <attribute name="attrs">
                     {'readonly': [('event_state', '!=', 'open')]}
                 </attribute>

@@ -21,11 +21,11 @@
 
             <xpath expr="//notebook" position="inside">
                 <page string="Project"
-                      attrs="{'invisible': [('partner_id', '=', False)]}">
+                      attrs="{'invisible': [('customer_partner_id', '=', False)]}">
                     <group>
-                        <field name="project_id" attrs="{'required': [('partner_id', '!=', False)]}"
+                        <field name="project_id" attrs="{'required': [('customer_partner_id', '!=', False)]}"
                                options="{'no_create': True}"
-                               domain="[('partner_ids', '=', partner_id)]"/>
+                               domain="[('partner_ids', '=', customer_partner_id)]"/>
                         <field name="task_id"
                                options="{'no_create': True}"
                                domain="[('project_id', '=', project_id)]"/>

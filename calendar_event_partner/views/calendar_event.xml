@@ -8,10 +8,10 @@
         <field name="arch" type="xml">
 
             <xpath expr="//label[@for='partner_ids']" position="before">
-                <label for="partner_id" string="Partner" class="oe_edit_only"/>
+                <label for="customer_partner_id" string="Partner" class="oe_edit_only"/>
                 <h2>
                     <field name="company_partner_id" invisible="1"/>
-                    <field name="partner_id" placeholder="Select partner..."
+                    <field name="customer_partner_id" placeholder="Select partner..."
                            nolabel="1" class="oe_inline"
                            domain="[('parent_id', '=', False)]"/>
                 </h2>
@@ -19,7 +19,7 @@
 
             <xpath expr="//field[@name='partner_ids']" position="attributes">
                 <attribute name="domain">
-                    ['|',('parent_id','=',partner_id),('parent_id','=',company_partner_id)]
+                    ['|',('parent_id','=',customer_partner_id),('parent_id','=',company_partner_id)]
                 </attribute>
             </xpath>
 
@@ -34,7 +34,7 @@
         <field name="arch" type="xml">
 
             <xpath expr="//field[@name='partner_ids']" position="before">
-                <field name="partner_id"/>
+                <field name="customer_partner_id"/>
             </xpath>
 
         </field>
@@ -57,11 +57,11 @@
         <field name="inherit_id" ref="calendar.view_calendar_event_search"/>
         <field name="arch" type="xml">
             <xpath expr="//field[@name='name']" position="after">
-                <field name="partner_id" string="Partner"/>
+                <field name="customer_partner_id" string="Partner"/>
             </xpath>
             <xpath expr="//field[@name='privacy']" position="after">
-                <filter name="partner_id" string="Partner" domain="[]"
-                        context="{'group_by':'partner_id'}"/>
+                <filter name="customer_partner_id" string="Partner" domain="[]"
+                        context="{'group_by':'customer_partner_id'}"/>
             </xpath>
         </field>
     </record>

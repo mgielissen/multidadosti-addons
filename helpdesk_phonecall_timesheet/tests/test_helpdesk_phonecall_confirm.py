@@ -53,7 +53,7 @@ class TestHelpDeskPhoneCallConfirmTimesheet(TestHelpDeskPhoneCallConfirm):
 
         self.assertEqual(phonecall.description, timesheet.name)
         self.assertEqual(phonecall.user_id.id, timesheet.user_id.id)
-        self.assertEqual(phonecall.partner_id.id, timesheet.partner_id.id)
+        self.assertEqual(phonecall.partner_id.id, timesheet.customer_partner_id.id)
         self.assertEqual(phonecall.project_id.id, timesheet.project_id.id)
         self.assertEqual(phonecall.company_id.id, timesheet.company_id.id)
         self.assertEqual(phonecall.start_date_hour[:10], timesheet.date)

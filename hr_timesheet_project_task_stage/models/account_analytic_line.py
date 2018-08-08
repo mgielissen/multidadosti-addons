@@ -17,7 +17,7 @@ class AccountAnalyticLine(models.Model):
         # get partner_id from project
         if vals.get('project_id'):
             project = self.env['project.project'].browse(vals.get('project_id'))
-            vals['partner_id'] = project.partner_id.id
+            vals['customer_partner_id'] = project.partner_id.id
 
         # get stage from task
         if vals.get('task_id'):

@@ -67,7 +67,7 @@ class CalendarEventFinish(models.TransientModel):
             'name': calendar_event.name,
             'date': start_datetime.date(),
             'user_id': user.id,
-            'partner_id': calendar_event.partner_id.id,
+            'customer_partner_id': calendar_event.customer_partner_id.id,
             'company_id': calendar_event.user_id.company_id.id,
             'project_id': calendar_event.project_id.id,
             'unit_amount': calendar_event.event_duration,

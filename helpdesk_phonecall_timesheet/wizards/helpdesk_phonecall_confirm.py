@@ -32,7 +32,7 @@ class HelpDeskPhoneCallConfirm(models.TransientModel):
                 'name': rec.description,
                 'date': dt.date(),
                 'user_id': rec.user_id.id,
-                'partner_id': rec.partner_id.id,
+                'customer_partner_id': rec.partner_id.id,
                 'helpdesk_id': rec.id,
                 'company_id': rec.company_id.id,
                 'project_id': rec.project_id.id,
