@@ -60,6 +60,12 @@
                         <a type="object" name="toggle_favorite"
                            class="o_right">
                         </a>
+                        <span class="o_right">
+                            <field name="is_favorite" 
+                                   widget="boolean_favorite" 
+                                   nolabel="1" 
+                                   force_save="1"/>
+                        </span>
                     </div>
                 </div>
             </xpath>
