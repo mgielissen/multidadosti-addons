@@ -11,6 +11,7 @@
         'Michell Stuttgart <michellstut@gmail.com>',
     ],
     'depends': [
+        'br_sale',
         'sale_crm',
     ],
     'data': [

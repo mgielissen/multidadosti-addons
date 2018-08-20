@@ -10,7 +10,7 @@
         'Rodrigo Ferreira <rodrigosferreira91@gmail.com>',
     ],
     'depends': [
-        'sale',
+        'br_sale',
         'crm',
     ],
     'data': [
