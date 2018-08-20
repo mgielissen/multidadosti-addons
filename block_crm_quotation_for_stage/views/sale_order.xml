@@ -4,7 +4,7 @@
     <record id="view_order_form" model="ir.ui.view">
         <field name="name">block.crm.quotation.for.stage.view.order.form</field>
         <field name="model">sale.order</field>
-        <field name="inherit_id" ref="sale.view_order_form"/>
+        <field name="inherit_id" ref="br_sale.view_order_form"/>
         <field name="arch" type="xml">
             <xpath expr="//field[@name='partner_id']" position="attributes">
                 <attribute name="domain">[('parent_id','=',False)]</attribute>
