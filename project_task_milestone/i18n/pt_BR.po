@@ -84,7 +84,7 @@ msgstr "Última atualização em"
 #: model:ir.ui.view,arch_db:project_task_milestone.project_milestone_view_tree
 #: model:ir.ui.view,arch_db:project_task_milestone.view_task_form2
 msgid "Milestone"
-msgstr "Milestone"
+msgstr "Campanha"
 
 #. module: project_task_milestone
 #: model:ir.model.fields,field_description:project_task_milestone.field_project_milestone_name
