@@ -8,11 +8,14 @@
         <field name="arch" type="xml">
 
             <xpath expr="//notebook" position="inside">
-                <page string="After Event"
-                      attrs="{'invisible': [('event_state','!=','done')]}">
+                <page string="After Event" attrs="{'invisible': [('event_state','!=','done')]}">
                     <group>
                         <field name="event_feedback"/>
-                        <field name="event_duration" widget="float_time"/>
+                        <label for="event_duration"/>
+                        <div>
+                            <field name="event_duration" widget="float_time" class="oe_inline"/>
+                            <span> hours</span>
+                        </div>
                     </group>
                 </page>
             </xpath>
@@ -30,7 +33,11 @@
                 <page string="After Event" attrs="{'invisible': [('event_state','!=','done')]}">
                     <group>
                         <field name="event_feedback"/>
-                        <field name="event_duration" widget="float_time"/>
+                        <label for="event_duration"/>
+                        <div>
+                            <field name="event_duration" widget="float_time" class="oe_inline"/>
+                            <span> hours</span>
+                        </div>
                     </group>
                 </page>
             </xpath>
