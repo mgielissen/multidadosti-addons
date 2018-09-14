@@ -12,7 +12,7 @@
                       attrs="{'invisible': [('event_state','!=','done')]}">
                     <group>
                         <field name="event_feedback"/>
-                        <field name="event_duration"/>
+                        <field name="event_duration" widget="float_time"/>
                     </group>
                 </page>
             </xpath>
@@ -30,7 +30,7 @@
                 <page string="After Event" attrs="{'invisible': [('event_state','!=','done')]}">
                     <group>
                         <field name="event_feedback"/>
-                        <field name="event_duration"/>
+                        <field name="event_duration" widget="float_time"/>
                     </group>
                 </page>
             </xpath>
