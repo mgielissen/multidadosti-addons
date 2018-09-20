@@ -244,7 +244,7 @@
               parent="menuitem_phonecall_service"
               action="action_helpdesk_phonecall_service"/>
 
-    <menuitem id="phonecall_service_menu" name="Configuration" sequence="2"
+    <menuitem id="phonecall_service_menu" name="Configuration" sequence="4"
               parent="menuitem_phonecall_service"/>
 
     <menuitem id="phonecall_service_configuration_sub_menu" name="Tags"
@@ -252,7 +252,7 @@
               parent="phonecall_service_menu"
               action="action_helpdesk_phonecall_service_tag"/>
 
-    <menuitem id="phonecall_service_report" name="Reports" sequence="4"
+    <menuitem id="phonecall_service_report" name="Reports" sequence="2"
               parent="menuitem_phonecall_service"/>
 
     <menuitem id="phonecall_service_report_sub_menu" name="Pivot"
