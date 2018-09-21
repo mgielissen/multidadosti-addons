@@ -16,6 +16,10 @@
                 <attribute name="filter_domain">[('name', 'ilike', self)]
                 </attribute>
             </xpath>
+            <xpath expr="//search/field[@name='partner_id']" position="attributes">
+                <attribute name="filter_domain">[('partner_id.name', 'ilike', self)]
+                </attribute>
+            </xpath>
             <xpath expr="//search/field[@name='name']" position="after">
                 <field name="code" string="Code"/>
                 <field name="description" string="Description"/>
