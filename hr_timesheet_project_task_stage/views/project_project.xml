@@ -1,0 +1,26 @@
+<odoo>
+
+    <!-- project.project inherit kanban view -->
+    <record id="project_project_view_kanban_inherit_sale_timesheet" model="ir.ui.view">
+        <field name="name">project.project.inherit.view.kanban</field>
+        <field name="model">project.project</field>
+        <field name="inherit_id" ref="sale_timesheet.project_project_view_kanban_inherit_sale_timesheet"/>
+        <field name="arch" type="xml">
+            <xpath expr="//a[@t-if='record.allow_timesheets.raw_value']" position="replace"/>
+        </field>
+    </record>
+
+    <!-- project.project inherit form view -->
+    <record id="edit_project" model="ir.ui.view">
+        <field name="name">project.project.inherit.view.form</field>
+        <field name="model">project.project</field>
+        <field name="inherit_id" ref="project.edit_project"/>
+        <field name="arch" type="xml">
+            <xpath expr="//button[@name='toggle_active']" position="before">
+                <button class="oe_stat_button" name="action_view_timesheet" type="object" string="Overview" icon="fa fa-binoculars"/>
+            </xpath>
+        </field>
+    </record>
+
+
+</odoo>

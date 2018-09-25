@@ -18,6 +18,7 @@
     'data': [
         'views/account_analytic_line.xml',
         'views/project_task.xml',
+        'views/project_project.xml',
     ],
     'installable': True,
     'auto_install': False,
