@@ -8,11 +8,10 @@
         <field name="priority">24</field>
         <field name="arch" type="xml">
 
-            <xpath expr="//div[hasclass('o_project_kanban_boxes')]" position="inside">
+            <xpath expr="//field[@name='alias_domain']" position="after">
+                <field name="planned_time"/>
                 <field name="partner_id" invisible="1"/>
                 <field name="user_id" invisible="1"/>
-                <field name="planned_time"/>
-                <field name="hours_left"/>
             </xpath>
 
             <xpath expr="//kanban/templates/t/div/child::div[1]"
@@ -22,15 +21,24 @@
                         <div class="o_kanban_card_content o_visible">
                             <div class="o_kanban_primary_left">
                                 <div class="o_primary">
-                                    <span>
+                                    <span class="o_value">
                                         <t t-esc="record.name.value"/>
                                     </span>
-                                    <span>
-                                        <t t-esc="record.partner_id.value"/>
-                                    </span>
-                                    <span>
-                                        <t t-esc="record.user_id.value"/>
-                                    </span>
+                                    <div t-if="record.partner_id.value">
+                                        <span class="o_value"><t t-esc="record.partner_id.value"/></span>
+                                        <br/>
+                                    </div>
+                                    <br/>
+                                    <div t-if="record.user_id.value">
+                                    
+                                        <span class="o_label"><b class="small">Project Manager:</b>&amp;nbsp;</span>
+                                        <span class="o_value"><t t-esc="record.user_id.value"/></span>
+                                    </div>
+                                    <span class="o_label"><b class="small">Planned Time:</b>&amp;nbsp;</span>
+                                    <span class="o_value"><field name="planned_time" widget="float_time"/></span>
+                                    <br/>
+                                    <span class="o_label"><b class="small">Hours Left:</b>&amp;nbsp;</span>
+                                    <span class="o_value"><field name="hours_left" widget="float_time"/></span>
                                 </div>
                             </div>
                         </div>
