@@ -11,7 +11,6 @@
         'Aldo Soares <soares_aldo@hotmail.com>',
     ],
     'depends': [
-        'project',
         'project_planned_time',
     ],
     'data': [
