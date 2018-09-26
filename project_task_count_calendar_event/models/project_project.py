@@ -37,8 +37,7 @@ class ProjectProject(models.Model):
         """
         self.ensure_one()
 
-        task_owner_id = self.env['res.users'].browse(self.env.uid)
-        partners = task_owner_id.partner_id | self.user_id.partner_id
+        partners = self.env.user.partner_id | self.user_id.partner_id
 
         category = self.env.ref('calendar.categ_meet1')
 
@@ -46,7 +45,7 @@ class ProjectProject(models.Model):
             'calendar', 'action_calendar_event')
 
         res['context'] = {
-            'search_default_partner_ids': task_owner_id.name,
+            'search_default_partner_ids': self.env.user.name,
             'search_default_project_id': self.id,
             'default_customer_partner_id': self.partner_id.id,
             'default_partner_ids': partners.ids,
