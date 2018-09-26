@@ -34,7 +34,7 @@ class ProjectTask(models.Model):
         res['context'] = {
             'search_default_partner_ids': task_owner_id.name,
             'search_default_task_id': self.id,
-            'default_partner_id': self.partner_id.id,
+            'default_customer_partner_id': self.partner_id.id,
             'default_partner_ids': partners.ids,
             'default_user_id': self.env.uid,
             'default_name': self.name,
