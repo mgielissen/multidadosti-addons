@@ -4,7 +4,7 @@
     <record id="view_calendar_event_tree" model="ir.ui.view">
         <field name="name">project.task.calendar.calendar.view.tree</field>
         <field name="model">calendar.event</field>
-        <field name="inherit_id" ref="calendar.view_calendar_event_tree"/>
+        <field name="inherit_id" ref="calendar_event_stage.view_calendar_event_tree"/>
         <field name="arch" type="xml">
             <xpath expr="//field[@name='partner_ids']" position="after">
                 <field name="project_id"/>
@@ -16,7 +16,7 @@
     <record id="view_calendar_event_form" model="ir.ui.view">
         <field name="name">project.task.calendar.calendar.view.form</field>
         <field name="model">calendar.event</field>
-        <field name="inherit_id" ref="calendar.view_calendar_event_form"/>
+        <field name="inherit_id" ref="calendar_event_partner.view_calendar_event_form"/>
         <field name="arch" type="xml">
 
             <xpath expr="//notebook" position="inside">
@@ -39,8 +39,7 @@
     <record id="view_calendar_event_form_popup" model="ir.ui.view">
         <field name="name">project.task.calendar.project.view.popup</field>
         <field name="model">calendar.event</field>
-        <field name="inherit_id"
-               ref="calendar.view_calendar_event_form_popup"/>
+        <field name="inherit_id" ref="calendar_event_partner.view_calendar_event_form_popup"/>
         <field name="arch" type="xml">
 
             <xpath expr="//field[@name='location']" position="before">
@@ -54,7 +53,7 @@
     <record id="view_calendar_event_search" model="ir.ui.view">
         <field name="name">project.task.calendar.calendar.view.search</field>
         <field name="model">calendar.event</field>
-        <field name="inherit_id" ref="calendar.view_calendar_event_search"/>
+        <field name="inherit_id" ref="calendar_event_partner.view_calendar_event_search"/>
         <field name="arch" type="xml">
             <xpath expr="//field[@name='categ_ids']" position="after">
                 <field name="project_id"/>
