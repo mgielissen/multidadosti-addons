@@ -17,17 +17,17 @@ class ProjectProject(models.Model):
                                default=lambda self: _("Issues"))
 
     def _compute_task_count(self):
-        for partner in self:
-            part = partner.task_ids.filtered(
+        for project in self:
+            part = project.task_ids.filtered(
                 lambda r: r.state not in ['done', 'cancelled'])
-            partner.task_count = len(part)
+            project.task_count = len(part)
 
     @api.multi
     def _compute_event_number(self):
-        for record in self:
-            cal_events = record.calendar_event_ids.filtered(
+        for project in self:
+            cal_events = project.calendar_event_ids.filtered(
                 lambda r: r.event_state == 'open')
-            record.event_number = len(cal_events)
+            project.event_number = len(cal_events)
 
     @api.multi
     def action_make_meeting(self):

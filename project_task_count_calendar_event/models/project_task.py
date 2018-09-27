@@ -10,10 +10,10 @@ class ProjectTask(models.Model):
 
     @api.multi
     def _compute_event_number(self):
-        for record in self:
-            cal_events = record.calendar_event_ids.filtered(
+        for task in self:
+            cal_events = task.calendar_event_ids.filtered(
                 lambda r: r.event_state == 'open')
-            record.event_number = len(cal_events)
+            task.event_number = len(cal_events)
 
     @api.multi
     def action_make_meeting(self):
