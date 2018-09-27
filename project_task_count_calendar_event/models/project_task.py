@@ -10,6 +10,9 @@ class ProjectTask(models.Model):
 
     @api.multi
     def _compute_event_number(self):
+        """Contabiliza a quantidade de eventos de calendario
+        relacionados a tarefa e que estão em aberto.
+        """
         for task in self:
             cal_events = task.calendar_event_ids.filtered(
                 lambda r: r.event_state == 'open')
@@ -17,9 +20,11 @@ class ProjectTask(models.Model):
 
     @api.multi
     def action_make_meeting(self):
-        """ This opens Meeting's calendar view to schedule meeting on
-        current applicant
-            @return: Dictionary value for created Meeting view
+        """ Abre a visualização de calendário agendar um evento de 
+        calendario relacionado ao projeto e tarefa atual.
+        
+        Returns:
+            dict -- ir.actions.act_window que redirecion para tela do calendario.
         """
         self.ensure_one()
 

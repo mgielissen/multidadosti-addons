@@ -17,6 +17,9 @@ class ProjectProject(models.Model):
                                default=lambda self: _("Issues"))
 
     def _compute_task_count(self):
+        """Contabiliza a quantidade de tarefas do projeto. As 
+        tarefas finalizadas ou cancelas não são contabilizadas.
+        """
         for project in self:
             part = project.task_ids.filtered(
                 lambda r: r.state not in ['done', 'cancelled'])
@@ -24,6 +27,9 @@ class ProjectProject(models.Model):
 
     @api.multi
     def _compute_event_number(self):
+        """Contabiliza a quantidade de eventos de calendario
+        relacionados ao projeto e que estão em aberto.
+        """
         for project in self:
             cal_events = project.calendar_event_ids.filtered(
                 lambda r: r.event_state == 'open')
@@ -31,9 +37,11 @@ class ProjectProject(models.Model):
 
     @api.multi
     def action_make_meeting(self):
-        """ This opens Meeting's calendar view to schedule meeting on
-        current applicant
-            @return: Dictionary value for created Meeting view
+        """ Abre a visualização de calendário agendar um evento de 
+        calendario relacionado ao projeto atual.
+        
+        Returns:
+            dict -- ir.actions.act_window que redirecion para tela do calendario.
         """
         self.ensure_one()
 
