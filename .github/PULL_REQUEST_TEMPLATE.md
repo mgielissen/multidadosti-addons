@@ -1,26 +1,7 @@
-# Description
+# Descrição
 
-Please include a summary of the change and which issue is fixed. Please also include relevant motivation and context. List any dependencies that are required for this change.
+Inclua aqui uma descrição detalhada das modificações realizadas por este PR. Para alterações de *frontend*, por gentileza adicione *screenshots* da tela. Não esqueça de selecionar corretamente as *labels* relacionadas a sua tarefa.
 
-## Type of change
+# Informações adicionais
 
-Please delete options that are not relevant.
-
-- [ ] Bug fix (non-breaking change which fixes an issue)
-- [ ] New feature (non-breaking change which adds functionality)
-- [ ] Breaking change (fix or feature that would cause existing functionality to not work as expected)
-
-# How Has This Been Tested?
-
-Please describe the tests that you ran to verify your changes. Provide instructions so we can reproduce. Please also list any relevant details for your test configuration
-
-# Checklist:
-
-- [ ] My code follows the style guidelines of this project
-- [ ] I have performed a self-review of my own code
-- [ ] I have commented my code, particularly in hard-to-understand areas
-- [ ] I have made corresponding changes to the documentation
-- [ ] My changes generate no new warnings
-- [ ] I have added tests that prove my fix is effective or that my feature works
-- [ ] New and existing unit tests pass locally with my changes
-- [ ] Any dependent changes have been merged and published in downstream modules
+Inclua aqui informações a respeito de procedimentos adicionais (dependências Python a serem instaladas, comandos SQL a serem executados no banco de dados, se este PR possui outros PR's como dependência) a serem realizados após o PR ser aceito. 
