@@ -1,5 +1,0 @@
-id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
-access_general_calendar_user,general.calendar.user,model_general_calendar,base.group_user,1,1,1,1
-access_general_calendar_admin,general.calendar.admin,model_general_calendar,base.group_system,1,1,1,1
-access_general_calendar_line_user,general.calendar.line.user,model_general_calendar_line,base.group_user,0,0,0,0
-access_general_calendar_line_admin,general.calendar.line.admin,model_general_calendar_line,base.group_system,1,1,1,1
