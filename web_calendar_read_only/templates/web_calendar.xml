@@ -1,8 +1,0 @@
-<?xml version="1.0" encoding="utf-8"?>
-<odoo>
-    <template id="assets_backend" name="web_calendar assets" inherit_id="web_calendar.assets_backend">
-            <xpath expr="//script[@src='/web_calendar/static/src/js/web_calendar.js']" position="replace">
-                <script type="text/javascript" src="/web_calendar_read_only/static/src/js/web_calendar.js"></script>
-            </xpath>
-    </template>
-</odoo>
