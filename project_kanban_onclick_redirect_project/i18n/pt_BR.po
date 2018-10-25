@@ -34,7 +34,7 @@ msgstr "<span class=\"o_label\"><b class=\"small\">Horas Planejadas:</b>&amp;nbs
 #. module: project_kanban_onclick_redirect_project
 #: model:ir.ui.view,arch_db:project_kanban_onclick_redirect_project.view_project_kanban
 msgid "<span class=\"o_label\"><b class=\"small\">Project Manager:</b>&amp;nbsp;</span>"
-msgstr "<span class=\"o_label\"><b class=\"small\">Gerente do Projeto:</b>&amp;nbsp;</span>"
+msgstr "<span class=\"o_label\"><b class=\"small\">GP:</b>&amp;nbsp;</span>"
 
 #. module: project_kanban_onclick_redirect_project
 #: model:ir.ui.view,arch_db:project_kanban_onclick_redirect_project.view_project_kanban
