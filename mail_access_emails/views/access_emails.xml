@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+
+    <menuitem id="mail_access_root"
+              name="Mail Access"
+              sequence="500"
+              web_icon="mail_access_emails,static/description/icon.png"/>
+
+</odoo>
