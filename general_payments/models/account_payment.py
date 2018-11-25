@@ -126,13 +126,15 @@ class AccountPayment(models.Model):
 
     @api.multi
     def post(self):
+        
+        context = dict(self._context or {})
+        # Valid only in receivement('outbound') or payment('inbound')
+        ctx_move = context.get('financial_move', False)
+        active_model = context.get('active_model', False)
+        is_financial_move = (
+            True if ctx_move and active_model != 'account.move' else False)
+
         for rec in self:
-            context = dict(rec._context or {})
-            # Valid only in receivement('outbound') or payment('inbound')
-            ctx_move = context.get('financial_move', False)
-            active_model = context.get('active_model', False)
-            is_financial_move = (
-                True if ctx_move and active_model != 'account.move' else False)
             if rec.payment_type != 'transfer' and is_financial_move:
                 # Creates the 'launch' move record to link with payment move 
                 # generated through 'account.payment' record creation
@@ -143,14 +145,9 @@ class AccountPayment(models.Model):
                     'move_id': move.id,
                     'payment_amount_original': move.amount,
                 })
-                # Calls super method as if it had been called in 'account.move'
-                # view.
-                context['active_model'] = 'account.move'
-                context['move_reference'] = move.id
-                super(AccountPayment, rec).with_context(context).post()
             else:
                 rec.payment_amount_original = rec.move_id.amount
-                super(AccountPayment, rec).post()
+        super(AccountPayment, self).post()
 
     @api.multi
     def reverse(self):
