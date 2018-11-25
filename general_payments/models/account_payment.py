@@ -6,7 +6,6 @@ from odoo.exceptions import UserError, ValidationError
 
 
 class AccountPayment(models.Model):
-
     _inherit = 'account.payment'
 
     payment_amount_original = fields.Monetary(string='Original Value',
@@ -150,28 +149,28 @@ class AccountPayment(models.Model):
         super(AccountPayment, self).post()
 
     @api.multi
-    def reverse(self):
+    def cancel(self):
         for rec in self:
-            # Option available only in payments which no relation with titles.
+            # Deletes reconcile records(account.partial.reconcile).
+            for line in rec.move_line_ids:
+                line.matched_credit_ids.unlink()
+                line.matched_debit_ids.unlink()
+                
             if not rec.invoice_ids:
-                reconcile_move = self.env['account.move.line'].search(
+                liquidity_move = self.env['account.move.line'].search(
                     [('payment_id', '=', rec.id),
                     ('move_id', '!=', rec.move_id.id)], limit=1).move_id
-                
-                # Deletes reconcile records(account.partial.reconcile).
-                for line in rec.move_line_ids:
-                    line.matched_credit_ids.unlink()
-                    line.matched_debit_ids.unlink()
-
+                # Deletes the proper liquidity move record.
+                liquidity_move.button_cancel()
+                liquidity_move.unlink()
                 # Deletes the proper launch move record.
-                reconcile_move.button_cancel()
-                reconcile_move.unlink()
-                # Deletes the proper payment move record.
                 rec.move_id.button_cancel()
                 rec.move_id.unlink()
-                # Turns the payment state to draft
-                rec.action_draft()
 
+            # Turns the payment state to cancel
+            super(AccountPayment, rec).cancel()
+            rec.move_name = False
+    
     @api.onchange('payment_type')
     def _onchange_payment_type(self):
         res = super(AccountPayment, self)._onchange_payment_type()

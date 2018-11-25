@@ -303,7 +303,7 @@ class TestAccountPayment(TransactionCase):
         # 'account.move' record ?
         self.assertEqual(self.supplier_payment.move_id.paid_status, 'paid')
 
-    def test_reverse(self):
+    def test_cancel(self):
         ctx = {
             'financial_move': True,
         }
@@ -311,10 +311,8 @@ class TestAccountPayment(TransactionCase):
         # Two move records must be created
         self.assertEqual(len(self.env['account.move'].search([])), 2)
 
-        self.supplier_payment.reverse()
+        self.supplier_payment.cancel()
         self.assertEqual(len(self.env['account.move'].search([]).ids), False)
-
-        self.assertEqual(self.supplier_payment.state, 'draft')
 
     def test__onchange_payment_type(self):
         res = self.payment_transfer._onchange_payment_type()
